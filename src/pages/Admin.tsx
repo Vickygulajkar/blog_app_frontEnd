@@ -31,7 +31,7 @@ function Admin() {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/api/users")
+            const response = await axios.get("https://blog-app-backend-mmiu.onrender.com/api/users")
             setUsers(response.data)
             setLoading(false)
         } catch (error) {
@@ -49,7 +49,7 @@ function Admin() {
         }
         try {
             const token = localStorage.getItem("token")
-            await axios.delete(`http://localhost:5000/api/users/${userId}`, {
+            await axios.delete(`https://blog-app-backend-mmiu.onrender.com/api/users/${userId}`, {
 headers: {
     Authorization: `Bearer ${token}`
 }
@@ -88,7 +88,7 @@ const handleUserUpdate = async () => {
     }
     try {
         const token = localStorage.getItem("token")
-        await axios.put(`http://localhost:5000/api/users/${selectedUser._id}`, editFormData, {
+        await axios.put(`https://blog-app-backend-mmiu.onrender.com/api/users/${selectedUser._id}`, editFormData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -115,7 +115,7 @@ const handleLogOut = () => {
 
 const createUser = () => {
     try {
-        const response = axios.post("http://localhost:5000/api/auth/register", createFormData)
+        const response = axios.post("https://blog-app-backend-mmiu.onrender.com/api/auth/register", createFormData)
         setUsers([...users, response.data])
         alert("User created successfully!")
         window.location.reload()
