@@ -1,6 +1,5 @@
 import { useState } from "react"
 import api from "../service/api"
-// import { Link, useNavigate } from "react-router-dom"
 import type { AuthResponse } from "../types"
 
 
@@ -9,7 +8,6 @@ function Login() {
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
-    // const navigate = useNavigate()
 
     const handleLogin = async () => {
         try {
