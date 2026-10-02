@@ -16,12 +16,12 @@ function Login() {
             const response = await api.post<AuthResponse>("/auth/login", { email, password })
             const { token } = response.data
             localStorage.setItem("token", token)
+            localStorage.setItem("user", JSON.stringify(response.data.user))
             alert("Login successful!")
             if (response.data.user.role === "admin") {
-                // navigate("/admin") 
                 window.location.href = "/admin" 
-                // navigate("/home") 
-                window.location.href = "/home" 
+            } else {
+                window.location.href = "/" 
             }
         } catch (error) {
             console.error("Login failed:", error)

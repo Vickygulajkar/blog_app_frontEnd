@@ -3,7 +3,8 @@ import './App.css'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Admin from './pages/Admin'
-// import Home from './pages/Home'
+import ProtectedRoute from './comopnents/ProtectedRoute'
+import { Navigate } from 'react-router-dom'
 
 function App() {
 
@@ -13,9 +14,18 @@ function App() {
       {/* <Login /> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin" element={
+            <ProtectedRoute>
+              <Admin />
+            </ProtectedRoute>
+          } />
+          <Route path="*" element={<Navigate to="/login" replace />} />
 
         </Routes>
       </BrowserRouter>
