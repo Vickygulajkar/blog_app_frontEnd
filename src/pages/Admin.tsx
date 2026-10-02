@@ -11,7 +11,7 @@ type User = {
 
 function Admin() {
     const [users, setUsers] = useState<User[]>([])
-    const [loading, setLoading] = useState(true)
+
     const [showEditForm, setShowEditForm] = useState(false)
     const [selectedUser, setSelectedUser] = useState<User | null>(null)
     // const [editloading, setEditLoading] = useState(false)
@@ -33,12 +33,9 @@ function Admin() {
         try {
             const response = await axios.get("https://blog-app-backend-mmiu.onrender.com/api/users")
             setUsers(response.data)
-            setLoading(false)
         } catch (error) {
             console.error("Failed to fetch users:", error)
-            setLoading(false)
         } finally {
-            setLoading(false)
         }
     }
 
@@ -110,12 +107,12 @@ useEffect(() => {
 const handleLogOut = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
-    window.location.href = "/login"
+    window.location.href = "/"
 }
 
-const createUser = () => {
+const createUser = async () => {
     try {
-        const response = axios.post("https://blog-app-backend-mmiu.onrender.com/api/auth/register", createFormData)
+        const response = await axios.post("https://blog-app-backend-mmiu.onrender.com/api/auth/register", createFormData)
         setUsers([...users, response.data])
         alert("User created successfully!")
         window.location.reload()
@@ -146,7 +143,6 @@ return (
     <>
         <div className="min-h-screen bg-gray-100 px-6 py-8">
 
-            {/* Header */}
             <div className="mb-6">
                 <h1 className="text-3xl font-bold text-gray-800">
                     Admin Dashboard
@@ -156,7 +152,6 @@ return (
                 </p>
             </div>
 
-            {/* Actions */}
             <div className="mb-6 flex items-center gap-3">
                 <button
                     onClick={() => setShowCreateModel(true)}
@@ -173,7 +168,6 @@ return (
                 </button>
             </div>
 
-            {/* Users Table */}
             <div className="overflow-x-auto rounded-lg bg-white shadow-md">
                 <table className="w-full border-collapse">
                     <thead>

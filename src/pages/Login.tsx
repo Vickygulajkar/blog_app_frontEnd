@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import api from "../service/api"
 // import { Link, useNavigate } from "react-router-dom"
 import type { AuthResponse } from "../types"
@@ -18,14 +18,14 @@ function Login() {
             localStorage.setItem("token", token)
             alert("Login successful!")
             if (response.data.user.role === "admin") {
-                // navigate("/admin") // Redirect to admin dashboard
-                window.location.href = "/admin" // Redirect to admin dashboard
-            } else {
-                // navigate("/home") // Redirect to home page
-                window.location.href = "/home" // Redirect to home page
+                // navigate("/admin") 
+                window.location.href = "/admin" 
+                // navigate("/home") 
+                window.location.href = "/home" 
             }
         } catch (error) {
             console.error("Login failed:", error)
+            setError("Login failed!")
             alert("Login failed!")
         } finally {
             setLoading(false)
